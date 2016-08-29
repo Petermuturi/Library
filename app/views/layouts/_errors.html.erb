@@ -1,0 +1,7 @@
+<% if object.errors.any? %>
+	<ul>
+	<% object.errors.each do |error, msg| %>
+		<li><%= "#{error.to_s.titleize} #{msg}" %></li>
+	<% end %>
+	</ul>
+<% end %>

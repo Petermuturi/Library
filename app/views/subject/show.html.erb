@@ -1,0 +1,34 @@
+
+<h1><%= @subject.name %></h1>
+<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+<hr />
+
+<!-- Add a book to this subject -->
+<%= form_tag :controller => 'subject', :action => 'add_book', :id => @subject.id do %>
+	<% if @book.present? %>
+		<%= render 'layouts/errors', object: @book %>
+	<%  end %>
+	<p><label for = "book_title">Title</label>: <%= text_field_tag 'book[title]' %></p>
+
+	<p><label for = "book_price">Price</label>:<%= text_field_tag 'book[price]' %></p>
+
+	<%= hidden_field_tag 'book[subject_id]', @subject.id %>
+
+	<p><label for = "book_description">Description</label><br/><%= text_area_tag 'book[description]' %></p>
+
+	<%= submit_tag "Create" %>
+<% end %>
+
+<!-- List this subjects books -->
+<ul id = "books">
+  <% @subject.books.each do |book| %>
+   	<li>
+	  <%= link_to book.title, {:controller => "book", :action => "show", :id => book.id} %><br>
+	  <%= link_to 'Edit', {:action => "edit", :id => book.id} %>
+		</li>
+  <% end %>
+</ul>
+
+<%= link_to 'Back', {:action => 'list'} %>
+<p><%= link_to "Edit this book", {:action => 'edit', :id => @subject.id }%></p>
+<p><%= link_to "delete this book", {:action => 'delete', :id => @subject.id }%></p>

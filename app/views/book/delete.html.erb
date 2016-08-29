@@ -1,0 +1,15 @@
+<p>Let's Get rid of some books</p>
+
+<h1><%= @book.title %></h1>
+
+<p>
+   <strong>Price: </strong> $<%= '%.2f' % @book.price %><br />
+   <strong>Subject :</strong> <%= @book.subject.name %><br />
+   <strong>Created Date:</strong> <%= @book.created_at.to_date %><br />
+</p>
+
+<p><%= @book.description %></p>
+
+<hr />
+
+<%= link_to 'DELETE me! :)', {:action => 'delete'} %>
